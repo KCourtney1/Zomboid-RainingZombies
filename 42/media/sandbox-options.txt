@@ -1,0 +1,64 @@
+VERSION = 1,
+
+option RainingZombies.FallDamageReduction
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = RainingZombies,
+    translation = RainingZombies_FallDamageReduction,
+}
+
+option RainingZombies.InstantGlassShatter
+{
+    type = boolean, default = false,
+    page = RainingZombies,
+    translation = RainingZombies_InstantGlassShatter,
+}
+
+option RainingZombies.HordeThrottle
+{
+    type = integer, min = 1, max = 60, default = 15,
+    page = RainingZombies,
+    translation = RainingZombies_HordeThrottle,
+}
+
+option RainingZombies.PlayerKnockdown
+{
+    type = boolean, default = true,
+    page = RainingZombies,
+    translation = RainingZombies_PlayerKnockdown,
+}
+
+option RainingZombies.PlayerDamagePerFloor
+{
+    type = integer, min = 0, max = 100, default = 20,
+    page = RainingZombies,
+    translation = RainingZombies_PlayerDamagePerFloor,
+}
+
+option RainingZombies.PlayerFractures
+{
+    type = boolean, default = true,
+    page = RainingZombies,
+    translation = RainingZombies_PlayerFractures,
+}
+
+option RainingZombies.CrawlerConversion
+{
+    type = boolean, default = true,
+    page = RainingZombies,
+    translation = RainingZombies_CrawlerConversion,
+}
+
+option RainingZombies.ZombieChainReaction
+{
+    type = boolean, default = true,
+    page = RainingZombies,
+    translation = RainingZombies_ZombieChainReaction,
+}
+
+option RainingZombies.AudioVisualPolish
+{
+    type = boolean, default = true,
+    page = RainingZombies,
+    translation = RainingZombies_AudioVisualPolish,
+}

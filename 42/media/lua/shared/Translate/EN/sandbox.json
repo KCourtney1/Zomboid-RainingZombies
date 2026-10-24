@@ -1,0 +1,21 @@
+{
+    "Sandbox_RainingZombies": "Raining Zombies",
+    "Sandbox_RainingZombies_FallDamageReduction": "Zombie Fall Damage Healing (%)",
+    "Sandbox_RainingZombies_FallDamageReduction_tooltip": "How much health zombies recover after hitting the ground. 100 = completely immune to fall damage. 0 = they take full vanilla fall damage.",
+    "Sandbox_RainingZombies_InstantGlassShatter": "Instant Glass Shatter",
+    "Sandbox_RainingZombies_InstantGlassShatter_tooltip": "If checked, zombies pushed against closed windows will instantly shatter the glass and fall through. If unchecked, they will get stuck until the glass is broken normally.",
+    "Sandbox_RainingZombies_HordeThrottle": "Horde Optimization Throttle",
+    "Sandbox_RainingZombies_HordeThrottle_tooltip": "Controls the flow of falling zombies to protect CPU performance. 15 frames is recommended. Lower numbers create a faster waterfall effect but require a stronger processor.",
+    "Sandbox_RainingZombies_PlayerKnockdown": "Death From Above: Knockdown",
+    "Sandbox_RainingZombies_PlayerKnockdown_tooltip": "If checked, players will be knocked down if a falling zombie lands directly on their tile.",
+    "Sandbox_RainingZombies_PlayerDamagePerFloor": "Death From Above: Damage Multiplier",
+    "Sandbox_RainingZombies_PlayerDamagePerFloor_tooltip": "Calculates how much health damage a player takes when crushed. The number is multiplied by the height of the fall. (Default 20 damage x 3 floors = 60 total damage).",
+    "Sandbox_RainingZombies_PlayerFractures": "Death From Above: Bone Fractures",
+    "Sandbox_RainingZombies_PlayerFractures_tooltip": "If checked, zombies falling from high altitudes will cause fractures to the player on impact. Drops from higher floors cause multiple fractures. Limbs are randomly selected to fracture.",
+    "Sandbox_RainingZombies_CrawlerConversion": "Shattered Legs (Crawlers)",
+    "Sandbox_RainingZombies_CrawlerConversion_tooltip": "If checked, falling zombies that survive a 2 floor impact, or more, will become crawlers. ",
+    "Sandbox_RainingZombies_ZombieChainReaction": "Zombie Bowling (Chain Reaction)",
+    "Sandbox_RainingZombies_ZombieChainReaction_tooltip": "If checked, falling zombies will physically crash into zombies on the street, knocking them down",
+    "Sandbox_RainingZombies_AudioVisualPolish": "Audio & Visual Gore",
+    "Sandbox_RainingZombies_AudioVisualPolish_tooltip": "If checked, falling bodies will trigger bone-breaking audio and paint the pavement with blood based on how far they fell."
+}
