@@ -11,7 +11,8 @@ try:
 except ImportError:
     raise SystemExit("Install the test runtime: python -m pip install --target .tools/python lupa==2.8")
 
-SERVER = ROOT / "42/media/lua/server"
+MOD_ROOT = ROOT / "Contents/mods/RainingZombies"
+SERVER = MOD_ROOT / "42/media/lua/server"
 ORIGINAL = ROOT / "tests/fixtures/RainingZombies_Logic.original.lua"
 
 
@@ -83,6 +84,54 @@ class RefactorTests(unittest.TestCase):
             old, new = self.compare("Events.OnZombieUpdate.fire(zombie)", setup)
             self.assertEqual(new.eval("trace()"), "")
             self.assertEqual(new.eval("scans"), 0)
+
+    def test_attacking_zombie_is_not_shoved_off_a_ledge_or_window(self):
+        # Keep attacking longer than the fall tracker timeout. The old code
+        # repeatedly pushes, even though the zombie has never left its attack.
+        for setup in ("", "origin.objects = {window(true)}"):
+            with self.subTest(setup=setup):
+                old, new = runtime(True, setup), runtime(False, setup)
+                for lua in (old, new):
+                    lua.execute("""
+                        zombie.attacking = true
+                        for i = 1, 650 do
+                            Events.OnZombieUpdate.fire(zombie)
+                            ticks(1)
+                        end
+                    """)
+                self.assertGreater(old.eval("zombie.x"), 10.2)
+                self.assertEqual(new.eval("zombie.x"), 10.2)
+                self.assertIsNone(new.eval("zombie.fallOnFront"))
+                self.assertEqual(new.eval("scans"), 0)
+
+    def test_attacking_zombie_does_not_shatter_glass(self):
+        lua = runtime(setup="""
+            origin.objects = {window(false)}
+            SandboxVars.RainingZombies.InstantGlassShatter = true
+            zombie.attacking = true
+        """)
+        lua.execute("Events.OnZombieUpdate.fire(zombie)")
+        self.assertFalse(lua.eval("origin.objects[1]:isSmashed() or false"))
+        self.assertEqual(lua.eval("trace()"), "")
+        self.assertEqual(lua.eval("scans"), 0)
+
+    def test_vaulting_resumes_when_attack_ends(self):
+        lua = runtime(setup="zombie.attacking = true")
+        lua.execute("Events.OnZombieUpdate.fire(zombie); ticks(1)")
+        self.assertEqual(lua.eval("zombie.x"), 10.2)
+        lua.execute("zombie.attacking = false; Events.OnZombieUpdate.fire(zombie)")
+        self.assertAlmostEqual(lua.eval("zombie.x"), 10.8)
+        self.assertTrue(lua.eval("zombie.fallOnFront"))
+        lua.execute("land()")
+        self.assertEqual(lua.eval("player.health"), 40)
+        self.assertEqual(lua.eval("zombie.health"), 1)
+
+    def test_attack_state_does_not_abandon_an_existing_fall(self):
+        self.compare("""
+            Events.OnZombieUpdate.fire(zombie)
+            zombie.attacking = true
+            land()
+        """)
 
     def test_missing_current_square_does_not_start_a_fall(self):
         lua = runtime(setup="zombie.square = nil")
@@ -193,7 +242,7 @@ class RefactorTests(unittest.TestCase):
 
     def test_defaults_match_sandbox_schema(self):
         lua = runtime(setup="SandboxVars = {}")
-        schema = (ROOT / "42/media/sandbox-options.txt").read_text()
+        schema = (MOD_ROOT / "42/media/sandbox-options.txt").read_text()
         options = re.findall(r"option RainingZombies\.(\w+)\s*\{[^}]*?default\s*=\s*(\w+)", schema)
         self.assertEqual(len(options), 9)
         for name, value in options:

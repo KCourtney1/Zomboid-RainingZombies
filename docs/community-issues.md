@@ -5,8 +5,10 @@ on October 23, 2026. Reports are evidence of symptoms, not confirmed diagnoses.
 
 | Priority | Report | Evidence | Current status |
 | --- | --- | --- | --- |
-| 1 | Stair travel can trigger damage and knockdown | [Marzhall, July 26](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c583929583674430500); [jeff_till, August 5](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422535348) | Added stair guards and a minimum one-floor impact distance. Engine-double regressions reproduce the old behavior and pass with the fix; actual stairs need in-game verification. |
-| 1 | Severe stuttering around Louisville, especially with other heavy mods | [Cyrisa, August 6](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422594167); [Ulas, August 6](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422599109) | Reduced redundant scans, collection fetches, and closure allocations. The reported stutters are not confirmed resolved. Profile frame time before choosing a bounded scheduling design. |
+| 1 | Stair travel can trigger damage and knockdown | [Marzhall, July 26](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c583929583674430500); [jeff_till, August 5](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422535348) | Added stair guards and a minimum one-floor impact distance. Engine-double regressions pass. On October 25, the author reported no knockdowns during stair fights in either direction; stair landings and custom-map stairs still need targeted checks. |
+| 1 | Severe stuttering around Louisville, especially with other heavy mods | [Cyrisa, August 6](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422594167); [Ulas, August 6](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592937761422599109) | Reduced redundant scans, collection fetches, and closure allocations. On October 25, the author reported that stuttering was gone during a high-density Louisville test. This is a qualitative observation, not a frame-time benchmark or a guarantee across mod lists. |
+| 1 | Possible wall crossings before a fall | Author playtest, October 25, 2026 | Observation is uncertain because roof falls can look similar. Code inspection and two engine-double scenarios confirm missing boundary/orientation checks; gameplay fix pending. See [playtest notes](playtest-2026-10-25.md). |
+| 1 | Attacker disappears beside an upper-floor opening and returns upstairs | Author follow-up, October 25, 2026 | Added an attack-state guard after reproducing repeated forced pushes during attacks in engine doubles. Automated tests pass; the author confirmed the disappearance was fixed in the follow-up in-game test. Boundary validation remains a separate open issue. |
 | 2 | Multiplayer behavior and desynchronization concerns | [Karmatic, August 10](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c592938033420142893); [Duke of Montebello, July 14](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c573795381137248983) | Requires ownership, server/client event, and replication investigation. Multiplayer support was not added. |
 | 3 | Falling animation looks like floating | [Dank, August 21](https://steamcommunity.com/sharedfiles/filedetails/?id=3763651059#c588435430711745469) | Requires an animation/physics investigation; current shove and fall-on-front behavior preserved. |
 
@@ -43,6 +45,6 @@ one full floor. Test stair transitions and custom-map stairs before release.
   like a landing. Also test delayed healing after a lethal fall and after other
   damage, since it currently restores the pre-fall health baseline.
 
-The original source TODO about player knockdown and health loss remains an
-in-game verification item. Automated tests confirm the correct API calls and
-toggle logic, not the engine's response or multiplayer replication.
+The author confirmed player impact damage and knockdowns of players and other
+zombies in the October 25 playtest. Individual sandbox toggle behavior and
+multiplayer replication still need in-game verification.

@@ -71,6 +71,7 @@ function character(name, class, height, health)
     function result:getY() return self.y end
     function result:getHealth() return self.health end
     function result:isAlive() return self.health > 0 end
+    function result:isAttacking() return self.attacking or false end
     function result:getCurrentSquare() return self.square end
     function result:getVariableBoolean() return self.climbing or false end
     function result:getForwardDirection()

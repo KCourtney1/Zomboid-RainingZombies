@@ -45,6 +45,10 @@ local function onZombieUpdate(zombie)
 
     if falls.contains(zombie) or zombie:getVariableBoolean("ClimbWindow") then return end
 
+    -- Do not reposition a zombie during a bite/grab attack. Proximity to an
+    -- opening alone must not interrupt combat or repeatedly shove it outside.
+    if zombie:isAttacking() then return end
+
     local currentSquare = zombie:getCurrentSquare()
     if not currentSquare or currentSquare:HasStairs() then return end
 

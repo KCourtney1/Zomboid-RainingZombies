@@ -1,0 +1,34 @@
+Have you ever looked up at a skyscraper in Louisville and wished the horde would pour out of the windows? Now they do.
+
+Raining Zombies lets zombies vault through upper-floor windows and tumble from ledges as they pursue the sights and sounds that attract them. Make enough noise beneath an occupied building and you might get more attention than you bargained for. Watch the windows. Watch the rooftops. And watch your head.
+
+Inspired by an idea from raas1337 on YouTube!
+
+[h1]FEATURES[/h1]
+[list]
+[*][b]Death From Above:[/b] Falling zombies can injure players, knock them down, and cause fractures. Higher falls mean more dangerous impacts.
+[*][b]Shattered Legs:[/b] Zombies that survive falls of two or more floors can become crawlers.
+[*][b]Zombie Bowling:[/b] Falling zombies can knock down other zombies where they land.
+[*][b]Visceral Impacts:[/b] Blood splashes and bone-breaking sounds make every landing count.
+[*][b]Customizable:[/b] Sandbox settings let you adjust player impact damage and zombie fall-damage reduction, toggle knockdowns, fractures, crawlers, chain reactions, and impact effects, and tune the update throttle for performance. Instant glass shattering is optional.
+[/list]
+
+[h1]LATEST UPDATE[/h1]
+[list]
+[*]Refactored the code for easier maintenance and future development.
+[*]Reduced repeated checks and other overhead around large hordes. High-density Louisville testing showed a noticeable improvement in stuttering.
+[*]Added safeguards so normal stair travel does not trigger the mod's forced vaults or small-drop impact effects.
+[*]Fixed the mod repeatedly pushing attacking zombies through nearby openings during grab/bite animations.
+[/list]
+
+[h1]SINGLEPLAYER SUPPORT[/h1]
+This release is intended for singleplayer. Multiplayer synchronization has not been implemented or verified. Hosted co-op support is planned for a separate development branch; it is not included in this update.
+
+[h1]EXISTING SAVES[/h1]
+The mod can be enabled on an existing save. Its sandbox options use their defaults unless configured. To adjust them in an existing game, use a compatible sandbox-settings mod or the game's debug tools. Back up your save before changing your mod list.
+
+[h1]BUG REPORTS[/h1]
+If something looks wrong, include your game version, relevant sandbox settings, other active mods, and what happened. For unexpected falls or apparent wall crossings, a short video showing the floor, window or ledge, and nearby zombies is especially helpful.
+
+Workshop ID: 3763651059
+Mod ID: RainingZombies
